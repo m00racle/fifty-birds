@@ -1,6 +1,6 @@
 -- add libraries
-push = require 'push'
-class = require 'class'
+push = require 'libs.push'
+class = require 'libs.class'
 
 -- add assets resources
 background = love.graphics.newImage('res/background.png')
