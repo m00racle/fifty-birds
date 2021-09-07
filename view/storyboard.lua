@@ -15,9 +15,18 @@ function love.load()
     love.window.setTitle('Fifty Bird')
 end
 
+function love.resize(w,h)
+    -- handle resizing on the app's windows
+    push:resize(w,h)
+end
+
 function love.draw()
     -- draw the screen
+    push:start()
+    
     -- background
     love.graphics.draw(background, 0, 0)
     love.graphics.draw(ground, 0, VIRTUAL_HEIGHT - 16)
+
+    push:finish()
 end
