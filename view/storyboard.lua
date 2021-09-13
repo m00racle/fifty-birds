@@ -7,9 +7,10 @@ VIRTUAL_HEIGHT = 288
 VIRTUAL_WIDTH = 512
 
 -- constant for the background and ground 
-BACKGROUND_SCROLL_SPEED = 50
+BACKGROUND_SCROLL_SPEED = 103
 LOOP_BACKGROUND = 413
-GROUND_SCROLL_SPEED = 100
+GROUND_SCROLL_SPEED = 150
+LOOP_GROUND = 1100 - VIRTUAL_WIDTH
 
 function love.load()
     -- loading game assets once
@@ -48,7 +49,7 @@ function love.update(dt)
         backgroundScroll = 0
     end
     -- scroll ground
-    if (groundScroll < VIRTUAL_WIDTH) then
+    if (groundScroll < LOOP_GROUND) then
         groundScroll = (groundScroll + GROUND_SCROLL_SPEED * dt)
     else
         groundScroll = 0
