@@ -23,6 +23,9 @@ function love.load()
     -- initial locations for background and ground
     backgroundScroll = 0
     groundScroll = 0
+
+    -- initialize bird
+    bird = Bird(birdPng, VIRTUAL_WIDTH/2, VIRTUAL_HEIGHT/2)
 end
 
 function love.resize(w,h)
@@ -37,6 +40,7 @@ function love.draw()
     -- background
     love.graphics.draw(background, -backgroundScroll, 0)
     love.graphics.draw(ground, -groundScroll, VIRTUAL_HEIGHT - 16)
+    bird:render()
 
     push:finish()
 end
