@@ -1,7 +1,7 @@
 -- Class Bird 
 
 -- constant value for gravity
-GRAVITY = 20
+local GRAVITY = 20
 Bird = Class{
     init = function(self, birdImage, posX, posY)
         -- init variables
