@@ -2,7 +2,7 @@
 
 function love.keypressed(key)
     -- sent the key to bird for inspection:
-    bird:hop(key)
+    bird:control(key)
     if key == 'escape' then
         love.event.quit()
     end

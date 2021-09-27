@@ -11,6 +11,7 @@ Bird = Class{
         self.posX = posX
         self.posY = posY
         self.dy = 0
+        self.hopKey = 'space'
     end
 }
 
@@ -27,10 +28,10 @@ function Bird:drop(dt)
     self.posY = self.posY + self.dy
 end
 
-function Bird:hop(key)
-    -- inspect the key if it is verified in settings (default: space)
-    if key == "space" then
-        -- hop
+function Bird:control(key)
+    -- inspect the key if it is verified in settings
+    if key == self.hopKey then
+        -- hop decreasing the effect of gravity
         self.dy = -5
     end
 end
