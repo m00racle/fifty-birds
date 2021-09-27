@@ -26,3 +26,11 @@ function Bird:drop(dt)
     -- apply current gravity accel to y position
     self.posY = self.posY + self.dy
 end
+
+function Bird:hop(key)
+    -- inspect the key if it is verified in settings (default: space)
+    if key == "space" then
+        -- hop
+        self.dy = -5
+    end
+end
