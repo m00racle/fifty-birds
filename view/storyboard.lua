@@ -12,6 +12,12 @@ LOOP_BACKGROUND = 413
 GROUND_SCROLL_SPEED = 150
 LOOP_GROUND = 1100 - VIRTUAL_WIDTH
 
+-- tables of objects
+local pipes = {}
+
+-- timer for pipe spawn
+local spawnTimer = 0
+
 function love.load()
     -- loading game assets once
     love.graphics.setDefaultFilter('nearest', 'nearest')
@@ -39,6 +45,11 @@ function love.draw()
     
     -- background
     love.graphics.draw(background, -backgroundScroll, 0)
+    -- render pipes before the ground to ensure the ground rendered above the pipe
+    for j, pipe in pairs(pipes) do
+        pipe:render()
+    end
+    
     love.graphics.draw(ground, -groundScroll, VIRTUAL_HEIGHT - 16)
     bird:render()
 
@@ -58,7 +69,26 @@ function love.update(dt)
     else
         groundScroll = 0
     end
+    -- spawn pipes in interval time
+    spawnTimer = spawnTimer + dt
+    if spawnTimer > 2 then
+        -- spawn new pipe and put it into the pipes table
+        table.insert(pipes, Pipe(pipePng, VIRTUAL_WIDTH, VIRTUAL_HEIGHT))
+        -- reset spawnTimer
+        spawnTimer = 0
+    end
+
     -- bird drop due to gravity
     bird:drop(dt)
+
+    -- update the swaned pipes scrolls
+    for i, pipe in pairs(pipes) do 
+        pipe:update(dt)
+
+        -- when pipe reach the left side of display delete it to save memory
+        if pipe.x < -pipe.width then
+            table.remove(pipes, i)
+        end
+    end
 end
 

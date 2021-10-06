@@ -11,4 +11,5 @@ pipePng = love.graphics.newImage('res/pipe.png')
 -- add modules
 require 'view.storyboard'
 require 'controller.control'
+require 'model.Pipe'
 require 'model.bird'
