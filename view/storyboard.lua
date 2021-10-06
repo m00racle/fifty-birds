@@ -58,5 +58,7 @@ function love.update(dt)
     else
         groundScroll = 0
     end
+    -- bird drop due to gravity
+    bird:drop(dt)
 end
 

@@ -1,5 +1,7 @@
 -- Class Bird 
 
+-- constant value for gravity
+local GRAVITY = 20
 Bird = Class{
     init = function(self, birdImage, posX, posY)
         -- init variables
@@ -8,10 +10,28 @@ Bird = Class{
         self.height = self.image:getHeight()
         self.posX = posX
         self.posY = posY
+        self.dy = 0
+        self.hopKey = 'space'
     end
 }
 
 function Bird:render()
     -- render the bird
     love.graphics.draw(self.image, self.posX - self.width/2, self.posY - self.height/2)
+end
+
+function Bird:drop(dt)
+    -- model the effect of gravity on bird
+    self.dy = self.dy + GRAVITY * dt
+
+    -- apply current gravity accel to y position
+    self.posY = self.posY + self.dy
+end
+
+function Bird:control(key)
+    -- inspect the key if it is verified in settings
+    if key == self.hopKey then
+        -- hop decreasing the effect of gravity
+        self.dy = -5
+    end
 end
