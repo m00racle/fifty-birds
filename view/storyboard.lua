@@ -39,6 +39,7 @@ function love.draw()
     -- render pipes before the ground to ensure the ground rendered above the pipe
     for j, pipe in pairs(pipes) do
         pipe['bottom']:render()
+        pipe['top']:render()
     end
     
     love.graphics.draw(ground, -groundScroll, VIRTUAL_HEIGHT - 16)
