@@ -26,7 +26,7 @@ function love.update(dt)
     spawnTimer = spawnTimer + dt
     if spawnTimer > 2 then
         -- spawn new pipe and put it into the pipes table
-        table.insert(pipes, Pipe(pipePng, VIRTUAL_WIDTH, VIRTUAL_HEIGHT))
+        table.insert(pipes, {['bottom'] = Pipe(pipePng, VIRTUAL_WIDTH, VIRTUAL_HEIGHT)})
         -- reset spawnTimer
         spawnTimer = 0
     end
@@ -36,10 +36,10 @@ function love.update(dt)
 
     -- update the swaned pipes scrolls
     for i, pipe in pairs(pipes) do 
-        pipe:update(dt)
+        pipe['bottom']:update(dt)
 
         -- when pipe reach the left side of display delete it to save memory
-        if pipe.x < -pipe.width then
+        if pipe['bottom'].x < -pipe['bottom'].width then
             table.remove(pipes, i)
         end
     end
