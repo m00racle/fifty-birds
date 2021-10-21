@@ -15,7 +15,15 @@ Pipe = Class{
 
 function Pipe:render()
     -- render the pipe to the display
-    love.graphics.draw(self.image, self.x, self.y, self.r)
+    -- if the r = 0 no offset, else offset to width:
+    if (self.r == 0) then
+        -- no offset
+        love.graphics.draw(self.image, self.x, self.y, self.r)
+    else
+        -- offset to width
+        love.graphics.draw(self.image, self.x, self.y, self.r,1,1,self.width)
+    end
+    
 end
 
 function Pipe:update(dt)

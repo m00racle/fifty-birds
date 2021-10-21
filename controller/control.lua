@@ -5,6 +5,7 @@ BACKGROUND_SCROLL_SPEED = 103
 LOOP_BACKGROUND = 413
 GROUND_SCROLL_SPEED = 150
 LOOP_GROUND = 1100 - VIRTUAL_WIDTH
+PIPE_GAP = 100
 
 -- timer for pipe spawn
 local spawnTimer = 0
@@ -24,10 +25,10 @@ function love.update(dt)
     end
     -- spawn pipes in interval time
     spawnTimer = spawnTimer + dt
-    if spawnTimer > 2 then
+    if spawnTimer > 3 then
         -- random y position :
         botY = math.random(VIRTUAL_HEIGHT / 2, VIRTUAL_HEIGHT - 20)
-        topY = botY - 40
+        topY = botY - PIPE_GAP
         -- spawn new pipe and put it into the pipes table
         table.insert(pipes, {['bottom'] = Pipe(pipePng, VIRTUAL_WIDTH, botY, 0), ['top'] = Pipe(pipePng, VIRTUAL_WIDTH, topY, math.rad(180))})
         -- reset spawnTimer
