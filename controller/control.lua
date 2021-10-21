@@ -44,7 +44,7 @@ function love.update(dt)
         pipe['top']:update(dt)
 
         -- when pipe reach the left side of display delete it to save memory
-        if pipe.x < -pipe.width then
+        if pipe['bottom'].x < -pipe['bottom'].width then
             table.remove(pipes, i)
         end
     end
