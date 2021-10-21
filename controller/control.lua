@@ -27,7 +27,7 @@ function love.update(dt)
     spawnTimer = spawnTimer + dt
     if spawnTimer > 3 then
         -- random y position :
-        botY = math.random(VIRTUAL_HEIGHT / 2, VIRTUAL_HEIGHT - 20)
+        botY = math.random(VIRTUAL_HEIGHT / 2, VIRTUAL_HEIGHT - 40)
         topY = botY - PIPE_GAP
         -- spawn new pipe and put it into the pipes table
         table.insert(pipes, {['bottom'] = Pipe(pipePng, VIRTUAL_WIDTH, botY, 0), ['top'] = Pipe(pipePng, VIRTUAL_WIDTH, topY, math.rad(180))})
