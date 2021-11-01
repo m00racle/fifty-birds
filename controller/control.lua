@@ -35,11 +35,18 @@ function love.update(dt)
     bird:drop(dt)
 
     -- update the swaned pipes scrolls
+    
     for i, pipe in pairs(pipes) do 
         pipe:update(dt)
-
+        
+    end
+    
+    -- now for test removing pipes in safer way
+    -- this is because update loop and removing loop done in different loop
+    -- this should prevent suttering when pipes are removed
+    for i, pipe in pairs(pipes) do
         -- when pipe reach the left side of display delete it to save memory
-        if pipe.x < -pipe.width then
+        if pipe.remove then
             table.remove(pipes, i)
         end
     end
