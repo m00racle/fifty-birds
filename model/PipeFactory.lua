@@ -1,10 +1,11 @@
 PipeFactory = Class{
-    init = function(self, pipeImage, maxHeight, gapHeight, startPos)
+    init = function(self, pipeImage, maxHeight, gapHeight, startPos, pipeSpeed)
         -- init variiables
         self.image = pipeImage
-        self.pipeWidth = self.image:getWidth
-        self.pipeHeight = self.image:getHeight
+        self.pipeWidth = self.image:getWidth()
+        self.pipeHeight = self.image:getHeight()
         self.x = startPos
+        self.pipeSpeed = pipeSpeed or 0
         -- initiate the y random engine
         self.lastY = 0
         self.virtualHeight = maxHeight

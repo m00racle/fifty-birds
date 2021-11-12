@@ -4,13 +4,15 @@ local PIPE_WIDTH = 70
 local PIPE_HEIGHT = 288
 
 Pipe = Class{
-    init = function(self, pipeImage, posX, maxY)
+    init = function(self, pipeImage, posX, position, posY, pipeSpeed)
         -- init variables
         self.image = pipeImage
-        self.width = PIPE_WIDTH
+        self.width = pipeImage:getWidth()
+        self.height = pipeImage:getHeight()
         self.x = posX
-        -- pos Y should be random between TO DO: find the optimum bottom limit!! the current makes the pipe lips sunk
-        self.y = math.random(maxY / 4, maxY - 20)
+        self.position = position
+        self.y = posY
+        self.pipeSpeed = pipeSpeed or PIPE_SPEED
         -- set the remove property to false.
         self.remove = false
     end
@@ -18,7 +20,8 @@ Pipe = Class{
 
 function Pipe:render()
     -- render the pipe to the display
-    love.graphics.draw(self.image, self.x, self.y)
+    -- love.graphics.draw(self.image, self.x, self.y)
+    love.graphics.draw(self.image, self.x, (self.position == "top" and self.y + self.height or self.y), 0, 1, self.position == "top" and -1 or 1)
 end
 
 function Pipe:update(dt)
