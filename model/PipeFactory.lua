@@ -1,4 +1,4 @@
-PipePair = Class{
+PipeFactory = Class{
     init = function(self, pipeImage, maxHeight, gapHeight, startPos)
         -- init variiables
         self.image = pipeImage
@@ -13,17 +13,22 @@ PipePair = Class{
     end
 }
 
-function PipePair:spawn()
+function PipeFactory:spawn()
     -- spawn new pipe pairs in the table
     -- decide the self.y random start position
     self.y = math.max(-pipeHeight + 10, math.min(self.lastY + math.random(-20, 20), self.virtualHeight - self.gapHeight - self.pipeHeight))
     -- now we inititate the top and bottom pipe for the pipeTable.
 end
 
-function PipePair:update(dt)
+function PipeFactory:update(dt)
     -- update the movement of the pipe pair
 end
 
-function PipePair:render()
+function PipeFactory:setGapHeight(gapHeight)
+    -- change the initial gap height
+    self.gapHeight = gapHeight
+end
+
+function PipeFactory:render()
     -- render the pipe pairs
 end
