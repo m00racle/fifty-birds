@@ -7,7 +7,7 @@ VIRTUAL_HEIGHT = 288
 VIRTUAL_WIDTH = 512
 
 -- tables of objects
-pipes = {}
+-- pipes = {}
 
 function love.load()
     -- loading game assets once
@@ -23,6 +23,9 @@ function love.load()
 
     -- initialize bird
     bird = Bird(birdPng, VIRTUAL_WIDTH/2, VIRTUAL_HEIGHT/2)
+
+    -- initialize PipeFactory
+    pipeFactory = PipeFactory(pipePng, VIRTUAL_HEIGHT, VIRTUAL_WIDTH)
 end
 
 function love.resize(w,h)
@@ -37,9 +40,7 @@ function love.draw()
     -- background
     love.graphics.draw(background, -backgroundScroll, 0)
     -- render pipes before the ground to ensure the ground rendered above the pipe
-    for j, pipe in pairs(pipes) do
-        pipe:render()
-    end
+    pipeFactory:render()
     
     love.graphics.draw(ground, -groundScroll, VIRTUAL_HEIGHT - 16)
     bird:render()

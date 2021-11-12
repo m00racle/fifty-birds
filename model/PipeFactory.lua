@@ -1,15 +1,18 @@
+local GAP_HEIGHT = 90
+local PIPE_SPEED = 60
+
 PipeFactory = Class{
-    init = function(self, pipeImage, maxHeight, gapHeight, startPos, pipeSpeed)
+    init = function(self, pipeImage, maxHeight, startPos, gapHeight, pipeSpeed)
         -- init variiables
         self.image = pipeImage
         self.pipeWidth = self.image:getWidth()
         self.pipeHeight = self.image:getHeight()
-        self.x = startPos
-        self.pipeSpeed = pipeSpeed or 0
+        self.x = startPos + self.pipeWidth
+        self.pipeSpeed = pipeSpeed or PIPE_SPEED
         -- initiate the y random engine
-        self.lastY = 0
+        self.lastY = -self.pipeHeight + math.random(80) + 20
         self.virtualHeight = maxHeight
-        self.gapHeight = gapHeight
+        self.gapHeight = gapHeight or GAP_HEIGHT
         self.pipeTable = {}
     end
 }
@@ -17,13 +20,12 @@ PipeFactory = Class{
 function PipeFactory:spawn()
     -- spawn new pipe pairs in the table
     -- decide the self.y random start position
-    self.y = math.max(-pipeHeight + 10, math.min(self.lastY + math.random(-20, 20), self.virtualHeight - self.gapHeight - self.pipeHeight))
+    self.y = math.max(-self.pipeHeight + 10, math.min(self.lastY + math.random(-20, 20), self.virtualHeight - self.gapHeight - self.pipeHeight))
+    self.lastY = self.y 
     -- now we inititate the top and bottom pipe for the pipeTable.
     self.pipes = {
-        ["upper"] = Pipe(self.pipeImage, self.startPos, "top", self.y)
-        ["lower"] = Pipe(self.pipeImagem, self.startPos, "bottom", self.y + self.pipeHeight + self.gapHeight)
-
-        -- TODO CHANGE THE Pipe class to conform with the parameter on this initialization.
+        ["upper"] = Pipe(self.image, self.x, "top", self.y, self.pipeSpeed),
+        ["lower"] = Pipe(self.image, self.x, "bottom", self.y + self.pipeHeight + self.gapHeight, self.pipeSpeed)
     }
     table.insert(self.pipeTable, self.pipes)
 end
@@ -42,7 +44,7 @@ function PipeFactory:update(dt)
     for k, pair in pairs(self.pipeTable) do
         -- check if either pipe is readi to removed
         if pair["upper"].remove or pair["lower"].remove then
-            table.remove(pipeTable, k)
+            table.remove(self.pipeTable, k)
         end
     end
 end

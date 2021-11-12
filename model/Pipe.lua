@@ -1,5 +1,5 @@
 -- prepare the local variable 
-local PIPE_SPEED = 60
+
 local PIPE_WIDTH = 70
 local PIPE_HEIGHT = 288
 
@@ -12,7 +12,7 @@ Pipe = Class{
         self.x = posX
         self.position = position
         self.y = posY
-        self.pipeSpeed = pipeSpeed or PIPE_SPEED
+        self.pipeSpeed = pipeSpeed 
         -- set the remove property to false.
         self.remove = false
     end
@@ -26,7 +26,7 @@ end
 
 function Pipe:update(dt)
     -- pipe movement during the frame
-    self.x = self.x - PIPE_SPEED * dt
+    self.x = self.x - self.pipeSpeed * dt
     if self.x < -PIPE_WIDTH then
         self.remove = true
     end
