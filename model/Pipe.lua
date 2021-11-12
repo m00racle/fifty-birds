@@ -20,7 +20,7 @@ Pipe = Class{
 
 function Pipe:render()
     -- render the pipe to the display
-    -- love.graphics.draw(self.image, self.x, self.y)
+    
     love.graphics.draw(self.image, self.x, (self.position == "top" and self.y + self.height or self.y), 0, 1, self.position == "top" and -1 or 1)
 end
 

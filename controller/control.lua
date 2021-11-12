@@ -25,8 +25,7 @@ function love.update(dt)
     -- spawn pipes in interval time
     spawnTimer = spawnTimer + dt
     if spawnTimer > 2 then
-        -- spawn new pipe pair and put it into the pipes table
-        -- table.insert(pipes, Pipe(pipePng, VIRTUAL_WIDTH, VIRTUAL_HEIGHT))
+        -- spawn new pipe pair 
         pipeFactory:spawn()
         -- reset spawnTimer
         spawnTimer = 0
@@ -37,21 +36,8 @@ function love.update(dt)
 
     -- update the swaned pipes scrolls
     
-    -- for i, pipe in pairs(pipes) do 
-    --     pipe:update(dt)
-        
-    -- end
     pipeFactory:update(dt)
     
-    -- now for test removing pipes in safer way
-    -- this is because update loop and removing loop done in different loop
-    -- this should prevent suttering when pipes are removed
-    -- for i, pipe in pairs(pipes) do
-    --     -- when pipe reach the left side of display delete it to save memory
-    --     if pipe.remove then
-    --         table.remove(pipes, i)
-    --     end
-    -- end
 end
 
 -- control all interaction and changes to the displayed views

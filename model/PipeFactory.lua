@@ -56,7 +56,6 @@ end
 
 function PipeFactory:render()
     -- render the pipe pairs
-    -- TODO modify the render of the pipe to accomodate the scale y -1 for the upper pipe
     for k, pair in pairs(self.pipeTable) do
         pair["upper"]:render()
         pair["lower"]:render()

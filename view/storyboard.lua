@@ -6,8 +6,6 @@ WINDOW_WIDTH = 1280
 VIRTUAL_HEIGHT = 288
 VIRTUAL_WIDTH = 512
 
--- tables of objects
--- pipes = {}
 
 function love.load()
     -- loading game assets once
