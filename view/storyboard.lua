@@ -6,11 +6,6 @@ WINDOW_WIDTH = 1280
 VIRTUAL_HEIGHT = 288
 VIRTUAL_WIDTH = 512
 
--- constant for the background and ground 
-BACKGROUND_SCROLL_SPEED = 103
-LOOP_BACKGROUND = 413
-GROUND_SCROLL_SPEED = 150
-LOOP_GROUND = 1100 - VIRTUAL_WIDTH
 
 function love.load()
     -- loading game assets once
@@ -26,6 +21,9 @@ function love.load()
 
     -- initialize bird
     bird = Bird(birdPng, VIRTUAL_WIDTH/2, VIRTUAL_HEIGHT/2)
+
+    -- initialize PipeFactory
+    pipeFactory = PipeFactory(pipePng, VIRTUAL_HEIGHT, VIRTUAL_WIDTH)
 end
 
 function love.resize(w,h)
@@ -39,26 +37,13 @@ function love.draw()
     
     -- background
     love.graphics.draw(background, -backgroundScroll, 0)
+    -- render pipes before the ground to ensure the ground rendered above the pipe
+    pipeFactory:render()
+    
     love.graphics.draw(ground, -groundScroll, VIRTUAL_HEIGHT - 16)
     bird:render()
 
     push:finish()
 end
 
-function love.update(dt)
-    -- scroll background
-    if (backgroundScroll < LOOP_BACKGROUND) then
-        backgroundScroll = (backgroundScroll + BACKGROUND_SCROLL_SPEED * dt)
-    else
-        backgroundScroll = 0
-    end
-    -- scroll ground
-    if (groundScroll < LOOP_GROUND) then
-        groundScroll = (groundScroll + GROUND_SCROLL_SPEED * dt)
-    else
-        groundScroll = 0
-    end
-    -- bird drop due to gravity
-    bird:drop(dt)
-end
 
