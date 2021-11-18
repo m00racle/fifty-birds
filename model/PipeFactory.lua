@@ -66,9 +66,15 @@ function PipeFactory:pipeIsHitBy(bird)
     -- detect if any of the pipe in the table is hit by the bird
     for k, pair in pairs(self.pipeTable) do
         -- check if the pipe is hit by the bird
-        if ((bird.posX + bird.width) > pair["upper"].x and bird.posX < (pair["upper"].x + pair["upper"].width)) or ((bird.posX + bird.width) > pair["lower"].x and bird.posX < (pair["lower"].x + pair["lower"].width)) then
+        if ((bird.posX) > pair["upper"].x and bird.posX < (pair["upper"].x + pair["upper"].width)) then
             -- test collide
-            if bird.posY < (pair["upper"].y + pair["upper"].height) or (bird.posY + bird.height) > pair["lower"].y then
+            if bird.posY < (pair["upper"].y + pair["upper"].height) then
+                return true
+            end
+        end
+        if ((bird.posX) > pair["lower"].x and bird.posX < (pair["lower"].x + pair["lower"].width)) then
+            -- check for collision
+            if (bird.posY) > pair["lower"].y then
                 return true
             end
         end
