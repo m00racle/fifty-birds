@@ -3,13 +3,14 @@
 -- constant value for gravity
 local GRAVITY = 20
 Bird = Class{
-    init = function(self, birdImage, posX, posY)
+    init = function(self, birdImage, posX, posY, maxHeight)
         -- init variables
         self.image = birdImage
         self.width = self.image:getWidth()
         self.height = self.image:getHeight()
         self.posX = posX
         self.posY = posY
+        self.maxHeight = maxHeight
         self.dy = 0
         self.hopKey = 'space'
     end
@@ -39,5 +40,8 @@ end
 function Bird:isCrashing()
     -- inspect whether the bird leaving the game screen
     -- both upper or hitting the ground will considered as crash
+    if self.posY < 0 or (self.posY + self.height/2) > self.maxHeight then
+        return true
+    end
     return false
 end

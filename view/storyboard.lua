@@ -20,7 +20,7 @@ function love.load()
     groundScroll = 0
 
     -- initialize bird
-    bird = Bird(birdPng, VIRTUAL_WIDTH/2, VIRTUAL_HEIGHT/2)
+    bird = Bird(birdPng, VIRTUAL_WIDTH/2, VIRTUAL_HEIGHT/2, VIRTUAL_HEIGHT)
 
     -- initialize PipeFactory
     pipeFactory = PipeFactory(pipePng, VIRTUAL_HEIGHT, VIRTUAL_WIDTH)
