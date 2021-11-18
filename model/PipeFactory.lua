@@ -61,3 +61,7 @@ function PipeFactory:render()
         pair["lower"]:render()
     end
 end
+
+function PipeFactory:pipeIsHit()
+    -- detect if any of the pipe in the table is hit by the bird
+end

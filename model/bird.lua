@@ -35,3 +35,9 @@ function Bird:control(key)
         self.dy = -5
     end
 end
+
+function Bird:isCrashing()
+    -- inspect whether the bird leaving the game screen
+    -- both upper or hitting the ground will considered as crash
+    return false
+end
