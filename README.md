@@ -16,3 +16,10 @@ Thus state machine will contain two files represent one display render function 
 
 However I need to research my way to make the simplest way to make state machine. I need to make sure its functions are fulfilled but adjusted for our design philosophy.
 
+#### NEXT:
+- [ ] Make new file for titleState class
+- [ ] Make new file for playState class
+- [ ] move all relevant play algorithm from main to the playState class
+- [ ] Test if the controller for each State can be divided into separate class or file in the Controller directory.
+- [ ] connect the StateMachine class to the main class 
+- [ ] test if transition between stateMachine are done seamlessly
