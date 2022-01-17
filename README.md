@@ -16,6 +16,8 @@ Thus state machine will contain two files represent one display render function 
 
 However I need to research my way to make the simplest way to make state machine. I need to make sure its functions are fulfilled but adjusted for our design philosophy.
 
+[link to the CS50 update 8 repo gitHub](https://github.com/games50/fifty-bird/tree/master/bird8)
+
 #### NEXT:
 - [ ] Make new file for titleState class
 - [ ] Make new file for playState class
