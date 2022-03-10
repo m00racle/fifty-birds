@@ -15,26 +15,6 @@ LOOP_BACKGROUND = 413
 GROUND_SCROLL_SPEED = 150
 LOOP_GROUND = 1100 - VIRTUAL_WIDTH
 
-function TitleState:control(key)
-    if key == 'enter' or key == 'return' then
-        gameState:change('play')
-    end
-end
-
-function TitleState:render()
-    love.graphics.setFont(flappyFont)
-    love.graphics.printf('Fifty Bird', 0, 64, VIRTUAL_WIDTH, 'center')
-
-    love.graphics.setFont(mediumFont)
-    love.graphics.printf('Press Enter', 0, 100, VIRTUAL_WIDTH, 'center')
-
-     -- background
-     love.graphics.draw(background, -backgroundScroll, 0)
-
-     -- render ground
-     love.graphics.draw(ground, -groundScroll, VIRTUAL_HEIGHT - 16)
-end
-
 function TitleState:update(dt)
     -- scroll background
     if (backgroundScroll < LOOP_BACKGROUND) then
@@ -48,4 +28,25 @@ function TitleState:update(dt)
     else
         groundScroll = 0
     end
+end
+
+function TitleState:control(key)
+    if key == 'enter' or key == 'return' then
+        gameState:change('play')
+    end
+end
+
+function TitleState:render()
+    -- background
+     love.graphics.draw(background, -backgroundScroll, 0)
+
+     -- render ground
+     love.graphics.draw(ground, -groundScroll, VIRTUAL_HEIGHT - 16)
+
+     love.graphics.setFont(flappyFont)
+    love.graphics.printf('Fifty Bird', 0, 64, VIRTUAL_WIDTH, 'center')
+
+    love.graphics.setFont(mediumFont)
+    love.graphics.printf('Press Enter', 0, 100, VIRTUAL_WIDTH, 'center')
+
 end
