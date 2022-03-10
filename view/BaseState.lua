@@ -14,8 +14,8 @@
  BaseState = Class{}
 
 --  here are the methods need to be defined later (optional) by the subclass
-function BaseState:init(controller) end
--- This update: Whenever the StateMachine is also defined its controller!
+function BaseState:init() end
+-- TODO This update: Whenever the StateMachine is also defined its controller!
 -- the means of defining the controller is making function callback that return BaseController class.
 
 function BaseState:enter() end
@@ -23,3 +23,5 @@ function BaseState:exit() end
 -- function BaseState:update(dt) end
 -- is moved to the BaseController class in Controller directory.
 function BaseState:render() end
+function BaseState:update(dt) end
+function BaseState:control(key) end

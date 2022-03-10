@@ -20,28 +20,29 @@
 --  I think the states are mostly on how to display and control
 -- Thus it should be located in view.
 
-StateMachine = Class{
-    init = function(states)
-        -- the states is a table consisting key value dict style list.
-        self.empty = {
-            render = function() end,
-            update = function() end,
-            enter = function() end,
-            exit = function() end
-        }
-        -- this empty table is to initialize the first time the class is initiated or between transition
-        -- basically it gives each function for render, update, enter, exit but does not 
-        
-        -- now for the list of all "real" states:
-        self.states = states
-        -- but when first initiated just in case the state is an empty list then set the current state as:
-        self.current = self.empty
-    end
-}
+StateMachine = Class{}
+
+function StateMachine:init(states)
+    -- the states is a table consisting key value dict style list.
+    self.empty = {
+        render = function() end,
+        update = function() end,
+        control = function() end,
+        enter = function() end,
+        exit = function() end
+    }
+    -- this empty table is to initialize the first time the class is initiated or between transition
+    -- basically it gives each function for render, update, enter, exit but does not 
+    
+    -- now for the list of all "real" states:
+    self.states = states or {}
+    -- but when first initiated just in case the state is an empty list then set the current state as:
+    self.current = self.empty
+end
 
 -- now make a function to enable the change and transition from one state to the other:
 function StateMachine:change(stateName, enterParams)
-    -- the enterParams is not yet clear
+    
     -- stateName = callback that return class type BasicStates
 
     -- make sure the current class is exist in the table 
@@ -71,4 +72,8 @@ end
 function StateMachine:render()
     -- similar to above delegating the function to particular state.
     self.current:render()
+end
+
+function StateMachine:control(key)
+    self.current:control(key)
 end

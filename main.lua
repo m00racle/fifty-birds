@@ -23,11 +23,22 @@ require 'controller.control'
 require 'model.Pipe'
 require 'model.PipeFactory'
 require 'model.bird'
+require 'libs.StateMachine'
+require 'view.BaseState'
+require 'view.TitleState'
+require 'view.PlayState'
 
 
 function love.load()
     -- loading game assets once
     love.graphics.setDefaultFilter('nearest', 'nearest')
+
+    -- init retro text
+    smallFont = love.graphics.newFont('res/font.ttf', 8)
+    mediumFont = love.graphics.newFont('res/flappy.ttf', 14)
+    flappyFont = love.graphics.newFont('res/flappy.ttf', 28)
+    hugeFont = love.graphics.newFont('res/flappy.ttf', 56)
+    love.graphics.setFont(flappyFont)
 
     push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT,{fullscreen=false, vsync=true, resizable= true})
 
@@ -36,12 +47,15 @@ function love.load()
     -- initial locations for background and ground
     backgroundScroll = 0
     groundScroll = 0
+    
+    -- init statemachines
+    gameState = StateMachine {
+        ['title'] = function() return TitleState() end,
+        ['play'] = function() return PlayState() end,
+    }
+    -- start with title state
+    gameState:change('title')
 
-    -- initialize bird
-    bird = Bird(birdPng, VIRTUAL_WIDTH/2, VIRTUAL_HEIGHT/2, VIRTUAL_HEIGHT)
-
-    -- initialize PipeFactory
-    pipeFactory = PipeFactory(pipePng, VIRTUAL_HEIGHT, VIRTUAL_WIDTH)
 end
 
 function love.resize(w,h)
