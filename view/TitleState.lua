@@ -9,12 +9,6 @@
  -- implementing super class 
 TitleState = Class{__includes = BaseState}
 
--- constant for the background and ground 
-BACKGROUND_SCROLL_SPEED = 103
-LOOP_BACKGROUND = 413
-GROUND_SCROLL_SPEED = 150
-LOOP_GROUND = 1100 - VIRTUAL_WIDTH
-
 function TitleState:control(key)
     if key == 'enter' or key == 'return' then
         gameState:change('play')
@@ -27,25 +21,4 @@ function TitleState:render()
 
     love.graphics.setFont(mediumFont)
     love.graphics.printf('Press Enter', 0, 100, VIRTUAL_WIDTH, 'center')
-
-     -- background
-     love.graphics.draw(background, -backgroundScroll, 0)
-
-     -- render ground
-     love.graphics.draw(ground, -groundScroll, VIRTUAL_HEIGHT - 16)
-end
-
-function TitleState:update(dt)
-    -- scroll background
-    if (backgroundScroll < LOOP_BACKGROUND) then
-        backgroundScroll = (backgroundScroll + BACKGROUND_SCROLL_SPEED * dt)
-    else
-        backgroundScroll = 0
-    end
-    -- scroll ground
-    if (groundScroll < LOOP_GROUND) then
-        groundScroll = (groundScroll + GROUND_SCROLL_SPEED * dt)
-    else
-        groundScroll = 0
-    end
 end
