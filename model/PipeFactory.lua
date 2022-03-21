@@ -14,6 +14,7 @@ PipeFactory = Class{
         self.virtualHeight = maxHeight
         self.gapHeight = gapHeight or GAP_HEIGHT
         self.pipeTable = {}
+        self.score = 0
     end
 }
 
@@ -76,6 +77,14 @@ function PipeFactory:pipeIsHitBy(bird)
             -- test for collision with extra margin of 4 px of collision depth
             if (bird.posY + bird.height/2 - 4) > pair["lower"].y then
                 return true
+            end
+        end
+        if not pair["upper"].passed and not pair["lower"].passed then
+            -- update the self.score
+            if bird.posX > (pair["upper"].x + pair["upper"].width) or bird.posX > (pair["lower"].x + pair["lower"].width) then
+                self.score = self.score + 1
+                pair["upper"].passed = true
+                pair["lower"].passed = true
             end
         end
     end

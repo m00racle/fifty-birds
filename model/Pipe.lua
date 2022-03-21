@@ -15,6 +15,7 @@ Pipe = Class{
         self.pipeSpeed = pipeSpeed 
         -- set the remove property to false.
         self.remove = false
+        self.passed = false
     end
 }
 
