@@ -79,4 +79,8 @@ LOOP_GROUND = 1100 - VIRTUAL_WIDTH
     
     love.graphics.draw(ground, -groundScroll, VIRTUAL_HEIGHT - 16)
     self.bird:render()
+
+    -- render the score
+    love.graphics.setFont(flappyFont)
+    love.graphics.print('Score: ' .. tostring(self.score), 8, 8)
  end
