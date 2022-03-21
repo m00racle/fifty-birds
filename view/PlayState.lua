@@ -13,7 +13,7 @@ GROUND_SCROLL_SPEED = 150
 LOOP_GROUND = 1100 - VIRTUAL_WIDTH
 
 -- timer for pipe spawn
-local spawnTimer = 0
+-- local self.spawnTimer = 0
 
  function PlayState:init()
     -- initialize bird
@@ -21,6 +21,13 @@ local spawnTimer = 0
 
     -- initialize PipeFactory
     self.pipeFactory = PipeFactory(pipePng, VIRTUAL_HEIGHT, VIRTUAL_WIDTH)
+
+    -- initialize score
+    self.score = 0
+
+    -- init spawn timer
+    self.spawnTimer = 0
+    -- TODO add the ability to add score each time the bird pass a pair of pipes.
  end
 
  function PlayState:update(dt)
@@ -38,12 +45,12 @@ local spawnTimer = 0
             groundScroll = 0
         end
         -- spawn pipes in interval time
-        spawnTimer = spawnTimer + dt
-        if spawnTimer > 2 then
+        self.spawnTimer = self.spawnTimer + dt
+        if self.spawnTimer > 2 then
             -- spawn new pipe pair 
             self.pipeFactory:spawn()
-            -- reset spawnTimer
-            spawnTimer = 0
+            -- reset self.spawnTimer
+            self.spawnTimer = 0
         end
 
         -- bird drop due to gravity
@@ -52,6 +59,11 @@ local spawnTimer = 0
         -- update the swaned pipes scrolls
         
         self.pipeFactory:update(dt)
+    else
+        -- this is where transition to score 
+        gameState:change('score', {
+            score = self.score
+        })
     end
  end
 

@@ -27,6 +27,7 @@ require 'libs.StateMachine'
 require 'view.BaseState'
 require 'view.TitleState'
 require 'view.PlayState'
+require 'view.ScoreState'
 
 
 function love.load()
@@ -52,6 +53,7 @@ function love.load()
     gameState = StateMachine {
         ['title'] = function() return TitleState() end,
         ['play'] = function() return PlayState() end,
+        ['score'] = function() return ScoreState() end
     }
     -- start with title state
     gameState:change('title')
