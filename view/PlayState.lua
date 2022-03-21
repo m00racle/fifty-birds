@@ -27,7 +27,7 @@ LOOP_GROUND = 1100 - VIRTUAL_WIDTH
 
     -- init spawn timer
     self.spawnTimer = 0
-    -- TODO add the ability to add score each time the bird pass a pair of pipes.
+    
  end
 
  function PlayState:update(dt)
@@ -59,6 +59,8 @@ LOOP_GROUND = 1100 - VIRTUAL_WIDTH
         -- update the swaned pipes scrolls
         
         self.pipeFactory:update(dt)
+        -- update the score
+        self.score = self.pipeFactory.score
     else
         -- this is where transition to score 
         gameState:change('score', {
