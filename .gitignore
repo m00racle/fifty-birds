@@ -1,0 +1,5 @@
+# ignore list 
+# ignore all in the ./scrap folder
+./scrap
+**/scrap
+./scrap/**
