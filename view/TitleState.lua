@@ -32,7 +32,7 @@ end
 
 function TitleState:control(key)
     if key == 'enter' or key == 'return' then
-        gameState:change('play')
+        gameState:change('countdown')
     end
 end
 
