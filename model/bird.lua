@@ -29,11 +29,16 @@ function Bird:drop(dt)
     self.posY = self.posY + self.dy
 end
 
+function Bird:jump()
+    -- hop decreasing the effect of gravity
+    self.dy = -5
+    sounds['jump']:play()
+end
+
 function Bird:control(key)
     -- inspect the key if it is verified in settings
     if key == self.hopKey then
-        -- hop decreasing the effect of gravity
-        self.dy = -5
+        self:jump()
     end
 end
 
@@ -41,6 +46,8 @@ function Bird:isCrashing()
     -- inspect whether the bird leaving the game screen
     -- both upper or hitting the ground will considered as crash
     if self.posY < 0 or (self.posY + self.height/2) > self.maxHeight then
+        sounds['hurt']:play()
+        sounds['explosion']:play()
         return true
     end
     return false
