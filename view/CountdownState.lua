@@ -19,6 +19,8 @@
     if self.timer > COUNTDOWN_TIME then
         -- set self.timer back to 0
        self.timer = self.timer % COUNTDOWN_TIME
+       -- play sfx
+       sounds['thick']:play()
        self.count = self.count - 1
        
        if self.count == 0 then

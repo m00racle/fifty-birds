@@ -70,18 +70,26 @@ function PipeFactory:pipeIsHitBy(bird)
         if ((bird.posX + bird.width/2 - 4) > pair["upper"].x and bird.posX < (pair["upper"].x + pair["upper"].width)) then
             -- test for collision with extra margin of 4 px of collision depth
             if (bird.posY - bird.height/2 + 4) < (pair["upper"].y + pair["upper"].height) then
+                -- play sfx:
+                sounds['hurt']:play()
+                sounds['explosion']:play()
                 return true
             end
         end
         if ((bird.posX + bird.width/2 - 4) > pair["lower"].x and bird.posX < (pair["lower"].x + pair["lower"].width)) then
             -- test for collision with extra margin of 4 px of collision depth
             if (bird.posY + bird.height/2 - 4) > pair["lower"].y then
+                -- play sfx
+                sounds['hurt']:play()
+                sounds['explosion']:play()
                 return true
             end
         end
         if not pair["upper"].passed and not pair["lower"].passed then
             -- update the self.score
             if bird.posX > (pair["upper"].x + pair["upper"].width) or bird.posX > (pair["lower"].x + pair["lower"].width) then
+                -- play sfx
+                sounds['score']:play()
                 self.score = self.score + 1
                 pair["upper"].passed = true
                 pair["lower"].passed = true
