@@ -36,8 +36,10 @@ function Bird:jump()
 end
 
 function Bird:control(key)
-    -- inspect the key if it is verified in settings
-    if key == self.hopKey then
+    -- inspect the key if it is verified in settings 
+    -- if the key is integer 1, 2, or 3 means this is input from mouse
+    -- while keyboard uses strings to recognize keys such as '1' , 'space'. 'enter'
+    if key == self.hopKey or key == 1 then
         self:jump()
     end
 end

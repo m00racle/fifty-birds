@@ -14,3 +14,10 @@ function love.keypressed(key)
     end
     gameState:control(key)
 end
+
+-- mouse control 
+function love.mousepressed( x, y, button, istouch, presses )
+    -- if the key is integer 1, 2, or 3 means this is input from mouse
+    -- while keyboard uses strings to recognize keys such as '1' , 'space'. 'enter'
+    gameState:control(button)
+end
